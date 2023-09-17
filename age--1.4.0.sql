@@ -30,6 +30,23 @@ CREATE TABLE ag_graph (
   namespace regnamespace NOT NULL
 );
 
+----------------- CITUS ----------------- 
+
+SELECT citus_set_coordinator_host('127.0.0.1', 5432);
+
+CREATE TABLE events (
+  device_id bigint,
+  event_id bigserial,
+  event_time timestamptz default now(),
+  data jsonb not null,
+  PRIMARY KEY (device_id, event_id)
+);
+
+-- distribute the events table across shards placed locally or on the worker nodes
+SELECT create_distributed_table('events', 'device_id');
+
+----------------- CITUS ----------------- 
+
 CREATE UNIQUE INDEX ag_graph_graphid_index ON ag_graph USING btree (graphid);
 
 -- include content of the ag_graph table into the pg_dump output

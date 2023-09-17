@@ -20,3 +20,4 @@ comment = 'AGE database extension'
 module_pathname = '$libdir/age'
 
 schema = 'ag_catalog'
+requires = 'orafce'
