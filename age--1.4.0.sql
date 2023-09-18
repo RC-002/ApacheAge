@@ -32,7 +32,7 @@ CREATE TABLE ag_graph (
 
 ----------------- CITUS ----------------- 
 
-SELECT citus_set_coordinator_host('127.0.0.1', 5432);
+-- SELECT citus_set_coordinator_host('127.0.0.1', 5432);
 
 CREATE TABLE events (
   device_id bigint,
@@ -43,7 +43,7 @@ CREATE TABLE events (
 );
 
 -- distribute the events table across shards placed locally or on the worker nodes
-SELECT create_distributed_table('events', 'device_id');
+SELECT create_distributed_table('ag_catalog.events', 'device_id');
 
 ----------------- CITUS ----------------- 
 
